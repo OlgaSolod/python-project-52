@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
-def index(request):
-    return render(request, 'index.html', context={
-        
-    })
+
+class IndexView(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        return render(request, 'index.html')
