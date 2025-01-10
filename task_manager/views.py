@@ -6,3 +6,4 @@ class IndexView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         return render(request, 'index.html')
+    
