@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class UserTestCase( TestCase):
+class UserTestCase(TestCase):
     fixtures = ["users.json"]
 
     def test_create_user(self):
@@ -29,7 +29,8 @@ class UserTestCase( TestCase):
     def test_update_user(self):
         user = User.objects.get(pk=1)
         user.first_name = "test!!"
-        self.assertEqual(user.first_name, 'test!!')
+        user.save()
+        self.assertEqual(User.objects.get(pk=1).first_name, 'test!!')
 
     def test_delete_user(self):
         user = User.objects.get(pk=2)
