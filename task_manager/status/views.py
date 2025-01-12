@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from task_manager.task.models import Task
 
 # Create your views here.
 
@@ -91,6 +92,13 @@ class DeleteStatusView(LoginRequiredMixin, DeleteView):
         messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
         return super().handle_no_permission()
 
+
     def form_valid(self, form):
+        status = self.get_object()
+        if Task.objects.filter(status=status).exists():
+            messages.error(
+                self.request, "Невозможно удалить статус, потому что он используется"
+            )
+            return redirect("statuses_list")
         messages.success(self.request, "Статус успешно удален")
         return super().form_valid(form)
