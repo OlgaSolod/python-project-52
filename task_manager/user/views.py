@@ -11,6 +11,7 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from task_manager.task.models import Task
 
 # Create your views here.
 
@@ -106,6 +107,11 @@ class CustomDeleteView(LoginRequiredMixin, DeleteView, DeletionMixin):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        if Task.objects.filter(creator=self.request.user).exists():
+            messages.error(
+                self.request, "Невозможно удалить пользователя, потому что он используется"
+            )
+            return redirect("users_list")
         messages.success(self.request, "Пользователь успешно удален")
         logout(self.request)
         return super().form_valid(form)
