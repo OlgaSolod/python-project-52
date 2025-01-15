@@ -2,6 +2,7 @@ from django import forms
 from task_manager.task.models import Task
 from django.contrib.auth import get_user_model
 from task_manager.status.models import Status
+from task_manager.label.models import Label
 
 User = get_user_model()
 
@@ -20,12 +21,29 @@ class CreateTaskForm(forms.ModelForm):
         label="Исполнитель",
         widget=forms.Select(attrs={"class": "form-select"}),
     )
+    labels = forms.ModelMultipleChoiceField(
+        queryset=Label.objects.all(),
+        required=False,
+        label="Метки",
+        widget=forms.SelectMultiple(attrs={"class": "form-select"} ),
+    )
+
 
     class Meta:
-        model = Task
-        fields = ["name", 'description', 'status', 'executor']
+        model = Task    
+        fields = ["name", 'description', 'status', 'executor', 'labels']
         labels = {"name": "Имя"}
 
 
 class UpdateTaskForm(CreateTaskForm):
-    pass
+    labels = forms.ModelMultipleChoiceField(
+        queryset=Label.objects.all(),
+        required=False,
+        label="Метки",
+        widget=forms.SelectMultiple(attrs={"class": "form-select"}),
+    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            # Устанавливаем начальные значения для поля labels
+            self.fields['labels'].initial = self.instance.labels.all()

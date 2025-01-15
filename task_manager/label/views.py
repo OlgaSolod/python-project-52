@@ -1,19 +1,21 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from task_manager.task.models import Task
-from django.contrib.auth import get_user_model
-from task_manager.task.forms import CreateTaskForm, UpdateTaskForm
+from task_manager.label.models import Label
+from task_manager.label.forms import CreateLabelForm, UpdateLabelForm
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from task_manager.task.models import Task
 
-User = get_user_model()
-class TasksListView(LoginRequiredMixin, ListView):
-    model = Task
-    template_name = "task/tasks.html"
-    context_object_name = "tasks"
+# Create your views here.
+
+
+class LabelsListView(LoginRequiredMixin, ListView):
+    model = Label
+    template_name = "label/labels.html"
+    context_object_name = "labels"
     login_url = "/login"
     redirect_field_name = ""
 
@@ -27,13 +29,13 @@ class TasksListView(LoginRequiredMixin, ListView):
         return super().handle_no_permission()
 
 
-class CreateTaskView(LoginRequiredMixin, CreateView):
-    model = Task
-    template_name = "task/create.html"
+class CreateLabelView(LoginRequiredMixin, CreateView):
+    model = Label
+    template_name = "label/create.html"
     login_url = "/login"
     redirect_field_name = ""
-    form_class = CreateTaskForm
-    success_url = reverse_lazy("tasks_list")
+    form_class = CreateLabelForm
+    success_url = reverse_lazy("labels_list")
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -45,29 +47,21 @@ class CreateTaskView(LoginRequiredMixin, CreateView):
         return super().handle_no_permission()
 
     def form_valid(self, form):
-        form.instance.creator_id = self.request.user.id
-        self.object = form.save()  # Сохраняем объект
-        messages.success(self.request, "Задача успешно создана")
+        messages.success(self.request, "Метка успешно создана")
         return super().form_valid(form)
 
 
-class UpdateTaskView(LoginRequiredMixin, UpdateView):
-    model = Task
-    template_name = "task/update.html"
+class UpdateLabelView(LoginRequiredMixin, UpdateView):
+    model = Label
+    template_name = "label/update.html"
     login_url = "/login"
     redirect_field_name = ""
-    form_class = UpdateTaskForm
-    success_url = reverse_lazy("tasks_list")
+    form_class = UpdateLabelForm
+    success_url = reverse_lazy("labels_list")
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return self.handle_no_permission()
-        obj = self.get_object()
-        if request.user.id != obj.creator_id:
-            messages.error(
-                request, "Вы не можете изменять данные других пользователей."
-            )
-            return redirect("tasks_list")
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
@@ -75,37 +69,37 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
         return super().handle_no_permission()
 
     def form_valid(self, form):
-        Task = form.save(commit=False)
+        status = form.save(commit=False)
         if form.cleaned_data.get("name"):
-            Task.save()
-            form.save_m2m()
-            messages.success(self.request, "Задача успешно изменена")
+            status.save()
+            messages.success(self.request, "Метка успешно изменена")
         return super().form_valid(form)
 
 
-class DeleteTaskView(LoginRequiredMixin, DeleteView):
-    model = Task
-    template_name = "task/delete.html"
+class DeleteLabelView(LoginRequiredMixin, DeleteView):
+    model = Label
+    template_name = "label/delete.html"
     login_url = "/login"
     redirect_field_name = ""
-    success_url = reverse_lazy("tasks_list")
+    success_url = reverse_lazy("labels_list")
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return self.handle_no_permission()
-       
-        obj = self.get_object()
-        if request.user.id != obj.creator_id:
-            messages.error(
-                request, "Вы не можете изменять данные других пользователей."
-            )
-            return redirect("tasks_list")
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
         messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
         return super().handle_no_permission()
 
+
     def form_valid(self, form):
-        messages.success(self.request, "Задача успешно удалена")
+        label = self.get_object()
+        if Task.objects.filter(labels=label).exists():
+            messages.error(
+                self.request, "Невозможно удалить метку, потому что она используется"
+            )
+            return redirect("labels_list")
+        messages.success(self.request, "Метка успешно удалена")
         return super().form_valid(form)
+
