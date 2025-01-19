@@ -1,7 +1,6 @@
 [project]
 name = "hexlet-code"
 version = "0.1.0"
-packages = [{include = "task_manager"}]
 repository = "https://github.com/OlgaSolod/python-project-52"
 description = "Task Manager Project"
 readme = "README.md"
@@ -22,3 +21,6 @@ dependencies = [
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "task_manager.settings"
 python_files = ["tests.py"]
+
+[tool.setuptools]
+packages = ["task_manager", "user", "label", "status", "task"]
