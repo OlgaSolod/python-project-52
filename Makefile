@@ -4,5 +4,5 @@ migrations:
 migrate:
 	python manage.py migrate
 
-start_server:
+start-server:
 	python manage.py runserver

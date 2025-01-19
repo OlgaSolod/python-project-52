@@ -3,6 +3,7 @@ from task_manager.task.models import Task
 from django.contrib.auth import get_user_model
 from task_manager.status.models import Status
 from task_manager.label.models import Label
+import django_filters
 
 User = get_user_model()
 

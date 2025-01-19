@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django_filters.views import FilterView
 from task_manager.task.models import Task
+from task_manager.task.filters import TaskFilter
 from django.contrib.auth import get_user_model
 from task_manager.task.forms import CreateTaskForm, UpdateTaskForm
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -10,12 +12,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 
 User = get_user_model()
-class TasksListView(LoginRequiredMixin, ListView):
+class TasksListView(LoginRequiredMixin, FilterView):
     model = Task
     template_name = "task/tasks.html"
     context_object_name = "tasks"
     login_url = "/login"
     redirect_field_name = ""
+    filterset_class=TaskFilter
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:

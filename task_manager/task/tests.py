@@ -17,7 +17,7 @@ class TaskTestCase(TestCase):
         self.task = Task.objects.create(name="Task by user2", creator_id=self.user2.pk)
 
     def test_create_task(self):
-        Task.objects.create(name='Created Task')
+        Task.objects.create(name="Created Task")
         self.assertEqual(Task.objects.get(pk=1).name, "Created Task")
 
     def test_update_task(self):

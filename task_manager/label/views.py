@@ -103,3 +103,4 @@ class DeleteLabelView(LoginRequiredMixin, DeleteView):
         messages.success(self.request, "Метка успешно удалена")
         return super().form_valid(form)
 
+

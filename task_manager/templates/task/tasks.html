@@ -1,8 +1,17 @@
 {% extends "base.html" %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 <h1 class="my-4"> Задачи </h1>
 <a class="btn btn-primary mb-3" href="/tasks/create/">Создать задачу</a>
+<div class="card mb-3">
+    <div class="card-body bg-light">
+        <form class='form-inline center' method="get">
+            {% bootstrap_form filter.form %}
+            <button type="submit" class="btn btn-primary">Показать</button>
+        </form>
+    </div>
+</div>
 {% if tasks %}
 <table class="table table-striped">
     <thead>
@@ -17,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for task in tasks %}
+        {% for task in filter.qs %}
         <tr>
             <td>{{ task.id }}</td>
             <td>{{ task.name }}</td>
@@ -31,7 +40,7 @@
                 <a href="/tasks/{{task.id}}/delete">Удалить</a>
             </td>
         </tr>
-
+        {% empty %}
         {% endfor %}
     </tbody>
 
