@@ -2,7 +2,8 @@
 name = "hexlet-code"
 version = "0.1.0"
 packages = [{include = "task_manager"}]
-description = "Add your description here"
+repository = "https://github.com/OlgaSolod/python-project-52"
+description = "Task Manager Project"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
