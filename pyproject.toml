@@ -25,4 +25,4 @@ dependencies = [
 
 
 [tool.setuptools]
-packages = ["task_manager"]
+packages = ["task_manager", "task_manager.user","task_manager.task", "task_manager.label", "task_manager.status"]
