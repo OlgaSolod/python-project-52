@@ -18,3 +18,5 @@ dependencies = [
     "uvicorn>=0.34.0",
     "whitenoise[brotli]>=6.8.2",
 ]
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "task_manager.settings"
