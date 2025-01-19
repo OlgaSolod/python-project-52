@@ -1,7 +1,10 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "hexlet-code"
 version = "0.1.0"
-repository = "https://github.com/OlgaSolod/python-project-52"
 description = "Task Manager Project"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,9 +18,11 @@ dependencies = [
     "pytest-django>=4.9.0",
     "python-dotenv>=1.0.1",
     "rollbar>=1.1.1",
+    "setuptools>=75.8.0",
     "uvicorn>=0.34.0",
     "whitenoise[brotli]>=6.8.2",
 ]
 
+
 [tool.setuptools]
-packages = ["task_manager", "user", "label", "status", "task"]
+packages = ["task_manager"]

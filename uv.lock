@@ -188,7 +188,7 @@ wheels = [
 [[package]]
 name = "hexlet-code"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "dj-database-url" },
     { name = "django" },
@@ -199,6 +199,7 @@ dependencies = [
     { name = "pytest-django" },
     { name = "python-dotenv" },
     { name = "rollbar" },
+    { name = "setuptools" },
     { name = "uvicorn" },
     { name = "whitenoise", extra = ["brotli"] },
 ]
@@ -214,6 +215,7 @@ requires-dist = [
     { name = "pytest-django", specifier = ">=4.9.0" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
     { name = "rollbar", specifier = ">=1.1.1" },
+    { name = "setuptools", specifier = ">=75.8.0" },
     { name = "uvicorn", specifier = ">=0.34.0" },
     { name = "whitenoise", extras = ["brotli"], specifier = ">=6.8.2" },
 ]
@@ -346,6 +348,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/83/9a/63e03434ab87db8955e11e48562f63f7ddb763fa8561b3c737a50e0bf0b7/rollbar-1.1.1.tar.gz", hash = "sha256:037383fc1a8da288257dcda2acb26bb28691724e7a71a67973567c31d47a914a", size = 83576 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/8c/ba/326e8069e3f86849426e6f853e749d3217395a75907d6527f320c7a2e6b5/rollbar-1.1.1-py3-none-any.whl", hash = "sha256:db751b4dd85dafcb576af2a8676a36787b952be9128837c68e50f70c3cf3d6c9", size = 115012 },
+]
+
+[[package]]
+name = "setuptools"
+version = "75.8.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/92/ec/089608b791d210aec4e7f97488e67ab0d33add3efccb83a056cbafe3a2a6/setuptools-75.8.0.tar.gz", hash = "sha256:c5afc8f407c626b8313a86e10311dd3f661c6cd9c09d4bf8c15c0e11f9f2b0e6", size = 1343222 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/69/8a/b9dc7678803429e4a3bc9ba462fa3dd9066824d3c607490235c6a796be5a/setuptools-75.8.0-py3-none-any.whl", hash = "sha256:e3982f444617239225d675215d51f6ba05f845d4eec313da4418fdbb56fb27e3", size = 1228782 },
 ]
 
 [[package]]
