@@ -10,8 +10,12 @@ django-filter==24.3
 gunicorn==23.0.0
 h11==0.14.0
 idna==3.10
+iniconfig==2.0.0
 packaging==24.2
+pluggy==1.5.0
 psycopg2-binary==2.9.10
+pytest==8.3.4
+pytest-django==4.9.0
 python-dotenv==1.0.1
 requests==2.32.3
 rollbar==1.1.1
