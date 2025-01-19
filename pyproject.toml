@@ -20,3 +20,4 @@ dependencies = [
 ]
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "task_manager.settings"
+python_files = ["tests.py"]
