@@ -6,3 +6,6 @@ migrate:
 
 start-server:
 	python manage.py runserver
+
+test:
+	python manage.py test 

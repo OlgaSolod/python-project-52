@@ -9,11 +9,11 @@ User = get_user_model()
 class StatusTestCase(TestCase):
 
     def test_create_status(self):
-        Status.objects.create(name="First status", creator_id=1)
+        Status.objects.create(name="First status")
         self.assertEqual(Status.objects.get(pk=1).name, "First status")
 
     def test_update_status(self):
-        Status.objects.create(name="First status", creator_id=1)
+        Status.objects.create(name="First status")
         status = Status.objects.get(pk=1)
         status.name = 'Second status'
         status.save()
