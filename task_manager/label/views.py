@@ -24,7 +24,9 @@ class LabelsListView(LoginRequiredMixin, ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
 
@@ -42,7 +44,9 @@ class CreateLabelView(LoginRequiredMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
@@ -64,7 +68,9 @@ class UpdateLabelView(LoginRequiredMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
@@ -88,14 +94,17 @@ class DeleteLabelView(LoginRequiredMixin, DeleteView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
         label = self.get_object()
         if Task.objects.filter(labels=label).exists():
             messages.error(
-                self.request, "Невозможно удалить метку, потому что она используется"
+                self.request,
+                "Невозможно удалить метку, потому что она используется"
             )
             return redirect("labels_list")
         messages.success(self.request, "Метка успешно удалена")

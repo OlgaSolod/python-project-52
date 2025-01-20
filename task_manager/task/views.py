@@ -26,7 +26,9 @@ class TasksListView(LoginRequiredMixin, FilterView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
 
@@ -44,7 +46,9 @@ class CreateTaskView(LoginRequiredMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
@@ -74,7 +78,9 @@ class UpdateTaskView(LoginRequiredMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
@@ -104,7 +110,9 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):

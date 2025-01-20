@@ -24,7 +24,9 @@ class StatusesListView(LoginRequiredMixin, ListView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
 
@@ -42,7 +44,9 @@ class CreateStatusView(LoginRequiredMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
@@ -64,7 +68,9 @@ class UpdateStatusView(LoginRequiredMixin, UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
@@ -88,14 +94,17 @@ class DeleteStatusView(LoginRequiredMixin, DeleteView):
         return super().dispatch(request, *args, **kwargs)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
     def form_valid(self, form):
         status = self.get_object()
         if Task.objects.filter(status=status).exists():
             messages.error(
-                self.request, "Невозможно удалить статус, потому что он используется"
+                self.request,
+                "Невозможно удалить статус, потому что он используется"
             )
             return redirect("statuses_list")
         messages.success(self.request, "Статус успешно удален")

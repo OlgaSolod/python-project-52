@@ -4,9 +4,12 @@ from task_manager.user.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, DeleteView
 from django.views.generic.edit import UpdateView, DeletionMixin
-from task_manager.user.forms import CustomRegistrationForm, CustomUpdateUserForm
+from task_manager.user.forms import (
+    CustomRegistrationForm,
+    CustomUpdateUserForm
+)
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import logout
@@ -82,7 +85,9 @@ class CustomUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
 
 
@@ -114,5 +119,7 @@ class CustomDeleteView(LoginRequiredMixin, DeleteView, DeletionMixin):
         return super().form_valid(form)
 
     def handle_no_permission(self):
-        messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
+        messages.error(
+            self.request, "Вы не авторизованы! Пожалуйста, выполните вход."
+            )
         return super().handle_no_permission()
