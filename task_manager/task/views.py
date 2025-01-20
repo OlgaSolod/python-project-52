@@ -100,7 +100,7 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
         obj = self.get_object()
         if request.user.id != obj.creator_id:
             messages.error(
-                request, "Вы не можете изменять данные других пользователей."
+                request, "Задачу может удалить только ее автор"
             )
             return redirect("tasks_list")
         return super().dispatch(request, *args, **kwargs)
