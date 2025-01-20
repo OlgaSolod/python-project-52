@@ -67,7 +67,7 @@ class CustomUpdateView(LoginRequiredMixin, UpdateView):
         obj = self.get_object()
         if obj != request.user:
             messages.error(
-                request, "Вы не можете изменять данные других пользователей."
+                request, "У вас нет прав для изменения"
             )
             return redirect("users_list")
         return super().dispatch(request, *args, **kwargs)
@@ -101,7 +101,7 @@ class CustomDeleteView(LoginRequiredMixin, DeleteView, DeletionMixin):
         obj = self.get_object()
         if obj != request.user:
             messages.error(
-                request, "Вы не можете изменять данные других пользователей."
+                request, "У вас нет прав для изменения"
             )
             return redirect("users_list")
         return super().dispatch(request, *args, **kwargs)
