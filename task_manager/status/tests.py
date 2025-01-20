@@ -15,9 +15,9 @@ class StatusTestCase(TestCase):
     def test_update_status(self):
         Status.objects.create(name="First status")
         status = Status.objects.get(pk=1)
-        status.name = 'Second status'
+        status.name = "Second status"
         status.save()
-        self.assertEqual(Status.objects.get(pk=1).name, 'Second status')
+        self.assertEqual(Status.objects.get(pk=1).name, "Second status")
 
     def test_delete_status(self):
         Status.objects.create(name="First status")

@@ -1,4 +1,4 @@
-from django.test import TestCase, Client
+from django.test import TestCase
 from task_manager.task.models import Task
 from django.contrib.auth import get_user_model
 from django.urls import reverse
@@ -35,5 +35,5 @@ class TaskTestCase(TestCase):
         # Проверяем, что задача все еще существует
         self.assertTrue(Task.objects.filter(pk=self.task.pk).exists())
 
-        # Проверяем, что получили редирект или ошибку
-        self.assertEqual(response.status_code, 302)  # Запрещено
+        # Проверяем, что получили редирект
+        self.assertEqual(response.status_code, 302)

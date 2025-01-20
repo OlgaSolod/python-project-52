@@ -10,11 +10,13 @@ User = get_user_model()
 
 class TaskFilter(django_filters.FilterSet):
     status = django_filters.ModelChoiceFilter(
-        queryset=Status.objects.all(), label="Статус",
+        queryset=Status.objects.all(),
+        label="Статус",
         widget=forms.Select(attrs={"class": "form-select"}),
     )
     executor = django_filters.ModelChoiceFilter(
-        queryset=User.objects.all(), label="Исполнитель",
+        queryset=User.objects.all(),
+        label="Исполнитель",
         widget=forms.Select(attrs={"class": "form-select"}),
     )
     label = django_filters.ModelChoiceFilter(

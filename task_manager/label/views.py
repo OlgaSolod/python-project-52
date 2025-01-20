@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic.list import ListView
 from task_manager.label.models import Label
 from task_manager.label.forms import CreateLabelForm, UpdateLabelForm
@@ -92,7 +91,6 @@ class DeleteLabelView(LoginRequiredMixin, DeleteView):
         messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
         return super().handle_no_permission()
 
-
     def form_valid(self, form):
         label = self.get_object()
         if Task.objects.filter(labels=label).exists():
@@ -102,5 +100,3 @@ class DeleteLabelView(LoginRequiredMixin, DeleteView):
             return redirect("labels_list")
         messages.success(self.request, "Метка успешно удалена")
         return super().form_valid(form)
-
-

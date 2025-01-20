@@ -4,7 +4,6 @@ from django.core.exceptions import ValidationError
 from task_manager.user.models import User
 
 
-
 class CustomRegistrationForm(UserCreationForm):
     password1 = forms.CharField(
         label="Пароль",

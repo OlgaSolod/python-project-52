@@ -66,9 +66,7 @@ class CustomUpdateView(LoginRequiredMixin, UpdateView):
             return self.handle_no_permission()
         obj = self.get_object()
         if obj != request.user:
-            messages.error(
-                request, "У вас нет прав для изменения"
-            )
+            messages.error(request, "У вас нет прав для изменения")
             return redirect("users_list")
         return super().dispatch(request, *args, **kwargs)
 
@@ -100,16 +98,15 @@ class CustomDeleteView(LoginRequiredMixin, DeleteView, DeletionMixin):
             return self.handle_no_permission()
         obj = self.get_object()
         if obj != request.user:
-            messages.error(
-                request, "У вас нет прав для изменения"
-            )
+            messages.error(request, "У вас нет прав для изменения")
             return redirect("users_list")
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         if Task.objects.filter(creator=self.request.user).exists():
             messages.error(
-                self.request, "Невозможно удалить пользователя, потому что он используется"
+                self.request,
+                "Невозможно удалить пользователя, потому что он используется",
             )
             return redirect("users_list")
         messages.success(self.request, "Пользователь успешно удален")

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic.list import ListView
 from task_manager.status.models import Status
 from task_manager.status.forms import CreateStatusForm, UpdateStatusForm
@@ -91,7 +90,6 @@ class DeleteStatusView(LoginRequiredMixin, DeleteView):
     def handle_no_permission(self):
         messages.error(self.request, "Вы не авторизованы! Пожалуйста, выполните вход.")
         return super().handle_no_permission()
-
 
     def form_valid(self, form):
         status = self.get_object()

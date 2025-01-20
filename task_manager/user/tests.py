@@ -21,7 +21,7 @@ class UserTestCase(TestCase):
             is_superuser=0,
             is_staff=False,
             is_active=True,
-            date_joined="2025-01-10 15:37:08.988618"
+            date_joined="2025-01-10 15:37:08.988618",
         )
         created_user = User.objects.get(username="dracomalfoy")
         self.assertEqual(created_user.username, "dracomalfoy")
@@ -30,7 +30,7 @@ class UserTestCase(TestCase):
         user = User.objects.get(pk=1)
         user.first_name = "test!!"
         user.save()
-        self.assertEqual(User.objects.get(pk=1).first_name, 'test!!')
+        self.assertEqual(User.objects.get(pk=1).first_name, "test!!")
 
     def test_delete_user(self):
         user = User.objects.get(pk=2)
