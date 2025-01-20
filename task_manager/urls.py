@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import IndexView
 from django.contrib.auth.views import LoginView, LogoutView
-from task_manager.user.views import RegisterView, CustomLoginView, CustomLogoutView
+from task_manager.user.views import CustomLoginView, CustomLogoutView
 
 
 urlpatterns = [
@@ -29,7 +29,6 @@ urlpatterns = [
     path('labels/', include('task_manager.label.urls')),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
-    path('create/', RegisterView.as_view(), name='create'),
     path('admin/', admin.site.urls),
     
 ]
